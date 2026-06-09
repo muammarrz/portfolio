@@ -1476,7 +1476,15 @@
           gap: 1rem;
         }
         .exp-photos {
-          display: none;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap; /* Agar foto turun ke baris baru jika layar HP terlalu kecil */
+          gap: 0.8rem;
+          margin-top: 0.5rem;
+        }
+        .exp-photo-frame {
+          width: 140px; /* Ukuran frame disesuaikan sedikit untuk mobile */
+          height: 100px;
         }
         .exp-role {
           font-size: 1.1rem;
