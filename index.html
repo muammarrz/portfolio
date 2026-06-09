@@ -29,6 +29,114 @@
         --border: #d4cec5;
       }
 
+      /* ============= */
+      /*   DARK MODE   */
+      /* ============= */
+      body.dark-mode {
+        --cream: #141210;
+        --dark: #f0ebe3;
+        --burnt: #e0703a;
+        --gold: #d4ac48;
+        --muted: #9a9690;
+        --card-bg: #1e1b18;
+        --border: #2e2b27;
+      }
+      body.dark-mode nav {
+        background: rgba(20, 18, 16, 0.92);
+      }
+      body.dark-mode .nav-mobile-menu {
+        background: rgba(20, 18, 16, 0.98);
+      }
+      /* Projects — fix hardcoded colors */
+      body.dark-mode #projects {
+        background: #0e0c0a;
+      }
+      body.dark-mode .projects-grid {
+        border-color: #3a3730;
+      }
+      body.dark-mode .project-card {
+        background: #1a1714;
+        border-color: #3a3730;
+      }
+      body.dark-mode .project-card:hover {
+        background: #201d19;
+      }
+      body.dark-mode .project-num {
+        color: #6a6660;
+      }
+      body.dark-mode .project-title {
+        color: #f0ebe3;
+      }
+      body.dark-mode .project-desc {
+        color: #b0aaa4;
+      }
+      body.dark-mode .tag {
+        color: #9a9590;
+        border-color: #4a4740;
+      }
+      body.dark-mode .project-dropdown-btn {
+        color: #9a9590;
+        border-color: #4a4740;
+      }
+      body.dark-mode .project-dropdown-btn:hover {
+        color: var(--gold);
+        border-color: var(--gold);
+      }
+      /* Orgs */
+      body.dark-mode #orgs {
+        background: #1a1714;
+      }
+      body.dark-mode .org-card {
+        background: #1e1b18;
+      }
+      body.dark-mode .cursor {
+        mix-blend-mode: normal;
+      }
+      body.dark-mode .lightbox {
+        background: rgba(0, 0, 0, 0.95);
+      }
+
+      /* DARK MODE TOGGLE BUTTON */
+      .dark-toggle {
+        background: none;
+        border: 1.5px solid var(--border);
+        cursor: pointer;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          transform 0.3s;
+        flex-shrink: 0;
+      }
+      .dark-toggle:hover {
+        background: var(--card-bg);
+        border-color: var(--burnt);
+        transform: rotate(20deg);
+      }
+      .dark-toggle svg {
+        width: 15px;
+        height: 15px;
+        fill: var(--dark);
+        transition: fill 0.2s;
+      }
+      .dark-toggle .icon-moon {
+        display: block;
+      }
+      .dark-toggle .icon-sun {
+        display: none;
+      }
+      body.dark-mode .dark-toggle .icon-moon {
+        display: none;
+      }
+      body.dark-mode .dark-toggle .icon-sun {
+        display: block;
+      }
+
       html {
         scroll-behavior: smooth;
       }
@@ -695,6 +803,8 @@
         transition: background 0.3s;
         position: relative;
         overflow: hidden;
+        min-width: 0;
+        word-break: break-word;
       }
       .project-card:hover {
         background: #252219;
@@ -1257,9 +1367,26 @@
         }
         .projects-grid {
           grid-template-columns: 1fr 1fr;
+          gap: 1px;
         }
+        .project-card:nth-child(3),
         .project-card:last-child {
           grid-column: span 2;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .projects-grid {
+          grid-template-columns: 1fr !important;
+          gap: 1px;
+        }
+        .project-card {
+          min-width: 0;
+          width: 100%;
+        }
+        .project-card:nth-child(3),
+        .project-card:last-child {
+          grid-column: span 1 !important;
         }
       }
 
@@ -1355,13 +1482,7 @@
           font-size: 1.1rem;
         }
 
-        /* projects */
-        .projects-grid {
-          grid-template-columns: 1fr;
-        }
-        .project-card:last-child {
-          grid-column: span 1;
-        }
+        /* projects — handled in dedicated block above */
 
         /* skills */
         .skills-layout {
@@ -1450,10 +1571,105 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <!-- Hamburger (mobile only) -->
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div style="display: flex; align-items: center; gap: 0.75rem">
+        <button
+          class="dark-toggle"
+          id="dark-toggle"
+          aria-label="Toggle dark mode"
+        >
+          <svg
+            class="icon-moon"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+          <svg
+            class="icon-sun"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="12" cy="12" r="5" fill="currentColor" />
+            <line
+              x1="12"
+              y1="1"
+              x2="12"
+              y2="3"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <line
+              x1="12"
+              y1="21"
+              x2="12"
+              y2="23"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <line
+              x1="4.22"
+              y1="4.22"
+              x2="5.64"
+              y2="5.64"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <line
+              x1="18.36"
+              y1="18.36"
+              x2="19.78"
+              y2="19.78"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <line
+              x1="1"
+              y1="12"
+              x2="3"
+              y2="12"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <line
+              x1="21"
+              y1="12"
+              x2="23"
+              y2="12"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <line
+              x1="4.22"
+              y1="19.78"
+              x2="5.64"
+              y2="18.36"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <line
+              x1="18.36"
+              y1="5.64"
+              x2="19.78"
+              y2="4.22"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+        <!-- Hamburger (mobile only) -->
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </nav>
 
     <!-- Mobile menu drawer -->
@@ -1724,7 +1940,7 @@
     <!-- PROJECTS -->
     <section id="projects">
       <div class="section-label reveal">Selected Work</div>
-      <h2 class="section-title reveal">Featured <em>Projects</em></h2>
+      <h2 class="section-title reveal"><em>Featured Projects</em></h2>
       <div class="projects-grid">
         <div class="project-card reveal">
           <div class="project-num">01 — Internship Project</div>
@@ -2225,6 +2441,19 @@
         { threshold: 0.1 },
       );
       reveals.forEach((el) => observer.observe(el));
+
+      // Dark mode toggle
+      const darkToggle = document.getElementById("dark-toggle");
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+      darkToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem(
+          "darkMode",
+          document.body.classList.contains("dark-mode"),
+        );
+      });
 
       // Nav shrink on scroll
       const nav = document.querySelector("nav");
